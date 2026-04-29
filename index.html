@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,11 +33,40 @@
                     <span class="material-icons">circle</span>
                     <span>Available for collab</span>
                 </div>
-                <button class="refresh-btn" id="refreshBtn" title="Refresh data">
+                <!-- 🔔 Reminder Button -->
+                <button class="icon-btn" id="reminderBtn" title="Set commit reminder">
+                    <span class="material-icons">notifications</span>
+                </button>
+                <!-- 🌙 Dark/Light Toggle -->
+                <button class="icon-btn" id="themeToggle" title="Toggle light/dark mode">
+                    <span class="material-icons" id="themeIcon">light_mode</span>
+                </button>
+                <button class="icon-btn" id="refreshBtn" title="Refresh data">
                     <span class="material-icons">refresh</span>
                 </button>
             </div>
         </header>
+
+        <!-- Reminder Modal -->
+        <div class="modal-overlay" id="reminderModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <span class="material-icons" style="color:var(--orange)">alarm</span>
+                    <h3>Commit Reminder</h3>
+                    <button class="modal-close" id="modalClose"><span class="material-icons">close</span></button>
+                </div>
+                <p class="modal-desc">Get a browser notification so you never forget to commit today.</p>
+                <div class="modal-row">
+                    <label>Remind me at:</label>
+                    <input type="time" id="reminderTime" class="time-input" value="21:00" />
+                </div>
+                <div id="reminderStatus" class="reminder-status"></div>
+                <div class="modal-actions">
+                    <button class="btn-set" id="setReminderBtn"><span class="material-icons">alarm_add</span> Set Reminder</button>
+                    <button class="btn-cancel" id="cancelReminderBtn"><span class="material-icons">alarm_off</span> Cancel</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Stats Row -->
         <div class="stats-row">
@@ -136,6 +165,47 @@
 
         </div>
 
+        <!-- 🎮 Game Shortcuts -->
+        <div class="card card-games">
+            <div class="card-header">
+                <span class="material-icons card-icon" style="color:#FF6B9D">videogame_asset</span>
+                <h2 class="card-title">Play My Games</h2>
+                <span class="card-sub">Live on GitHub Pages</span>
+            </div>
+            <div class="games-grid">
+                <a href="https://romeototo.github.io/ai-tycoon-rialo-game/" target="_blank" class="game-card">
+                    <div class="game-thumb game-thumb-1">
+                        <span class="material-icons game-icon">hub</span>
+                    </div>
+                    <div class="game-info">
+                        <div class="game-name">Rialo Network Tycoon</div>
+                        <div class="game-desc">Idle clicker · Build validator nodes · Earn $RIA</div>
+                        <div class="game-tags">
+                            <span class="game-tag">Web3 Theme</span>
+                            <span class="game-tag">Idle</span>
+                            <span class="game-tag">Prestige</span>
+                        </div>
+                    </div>
+                    <button class="play-btn"><span class="material-icons">play_arrow</span> Play</button>
+                </a>
+                <a href="https://romeototo.github.io/monster-tapper/" target="_blank" class="game-card">
+                    <div class="game-thumb game-thumb-2">
+                        <span class="material-icons game-icon">pest_control</span>
+                    </div>
+                    <div class="game-info">
+                        <div class="game-name">Monster Tapper</div>
+                        <div class="game-desc">Tap monsters · Boss battles · Upgrade heroes</div>
+                        <div class="game-tags">
+                            <span class="game-tag">Clicker</span>
+                            <span class="game-tag">Boss Fights</span>
+                            <span class="game-tag">10 Stages</span>
+                        </div>
+                    </div>
+                    <button class="play-btn play-btn-2"><span class="material-icons">play_arrow</span> Play</button>
+                </a>
+            </div>
+        </div>
+
         <!-- Pinned Repos -->
         <div class="card card-repos">
             <div class="card-header">
@@ -143,9 +213,7 @@
                 <h2 class="card-title">Featured Projects</h2>
                 <span class="card-sub" id="repoCount">Loading...</span>
             </div>
-            <div class="repos-grid" id="reposGrid">
-                <!-- Filled by JS -->
-            </div>
+            <div class="repos-grid" id="reposGrid"></div>
         </div>
 
         <!-- Bottom Row -->
@@ -165,9 +233,7 @@
                         <span class="material-icons">add</span>
                     </button>
                 </div>
-                <ul class="todo-list" id="todoList">
-                    <!-- Filled by JS -->
-                </ul>
+                <ul class="todo-list" id="todoList"></ul>
                 <div class="todo-actions">
                     <button class="todo-clear-btn" id="todoClearDone">
                         <span class="material-icons">cleaning_services</span> Clear done
@@ -175,44 +241,71 @@
                 </div>
             </div>
 
-            <!-- Quick Links -->
-            <div class="card card-links">
-                <div class="card-header">
-                    <span class="material-icons card-icon" style="color:#00D9FF">rocket_launch</span>
-                    <h2 class="card-title">Quick Links</h2>
-                </div>
-                <div class="links-grid">
-                    <a href="https://romeototo.github.io/MyFirstProject/" target="_blank" class="quick-link">
-                        <span class="material-icons">person</span>
-                        <span>Portfolio</span>
-                    </a>
-                    <a href="https://github.com/romeototo" target="_blank" class="quick-link">
-                        <span class="material-icons">code</span>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://romeototo.github.io/ai-tycoon-rialo-game/" target="_blank" class="quick-link">
-                        <span class="material-icons">videogame_asset</span>
-                        <span>Rialo Tycoon</span>
-                    </a>
-                    <a href="https://romeototo.github.io/monster-tapper/" target="_blank" class="quick-link">
-                        <span class="material-icons">catching_pokemon</span>
-                        <span>Monster Tapper</span>
-                    </a>
-                    <a href="https://x.com/RoMeoT0T0" target="_blank" class="quick-link">
-                        <span class="x-icon-sm">𝕏</span>
-                        <span>@RoMeoT0T0</span>
-                    </a>
-                    <a href="https://github.com/romeototo/telegram-ai-it-automation-agent" target="_blank" class="quick-link">
-                        <span class="material-icons">smart_toy</span>
-                        <span>TG AI Agent</span>
-                    </a>
+            <!-- Weekly Goal + Quick Links -->
+            <div class="right-col">
+
+                <!-- 📅 Weekly Goal -->
+                <div class="card card-goal">
+                    <div class="card-header">
+                        <span class="material-icons card-icon" style="color:#FECA57">emoji_events</span>
+                        <h2 class="card-title">Weekly Goal</h2>
+                        <button class="edit-goal-btn" id="editGoalBtn" title="Edit goal">
+                            <span class="material-icons">edit</span>
+                        </button>
+                    </div>
+                    <div id="goalDisplay">
+                        <div class="goal-text" id="goalText">No goal set — click ✏️ to add one</div>
+                        <div class="goal-progress-wrap">
+                            <div class="goal-progress-bar">
+                                <div class="goal-progress-fill" id="goalFill" style="width:0%"></div>
+                            </div>
+                            <div class="goal-progress-label">
+                                <span id="goalCurrent">0</span> / <span id="goalTarget">7</span> commits this week
+                            </div>
+                        </div>
+                    </div>
+                    <div id="goalEdit" style="display:none">
+                        <input type="text" id="goalInput" class="todo-input" placeholder="e.g. Ship game update" maxlength="60" />
+                        <div class="goal-edit-row">
+                            <label style="font-size:.8rem;color:var(--text2)">Target commits:</label>
+                            <input type="number" id="goalTargetInput" class="num-input" value="7" min="1" max="30" />
+                            <button class="btn-set" id="saveGoalBtn"><span class="material-icons">save</span> Save</button>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Daily Tip -->
-                <div class="daily-tip" id="dailyTip">
-                    <span class="material-icons">tips_and_updates</span>
-                    <span id="tipText">Loading tip...</span>
+                <!-- Quick Links -->
+                <div class="card card-links">
+                    <div class="card-header">
+                        <span class="material-icons card-icon" style="color:#00D9FF">rocket_launch</span>
+                        <h2 class="card-title">Quick Links</h2>
+                    </div>
+                    <div class="links-grid">
+                        <a href="https://romeototo.github.io/MyFirstProject/" target="_blank" class="quick-link">
+                            <span class="material-icons">person</span><span>Portfolio</span>
+                        </a>
+                        <a href="https://github.com/romeototo" target="_blank" class="quick-link">
+                            <span class="material-icons">code</span><span>GitHub</span>
+                        </a>
+                        <a href="https://x.com/RoMeoT0T0" target="_blank" class="quick-link">
+                            <span class="x-icon-sm">𝕏</span><span>@RoMeoT0T0</span>
+                        </a>
+                        <a href="https://github.com/romeototo/telegram-ai-it-automation-agent" target="_blank" class="quick-link">
+                            <span class="material-icons">smart_toy</span><span>TG AI Agent</span>
+                        </a>
+                        <a href="https://github.com/romeototo/dev-dashboard" target="_blank" class="quick-link">
+                            <span class="material-icons">dashboard</span><span>This Repo</span>
+                        </a>
+                        <a href="https://romeototo.github.io/dev-dashboard/" target="_blank" class="quick-link">
+                            <span class="material-icons">open_in_new</span><span>Live Demo</span>
+                        </a>
+                    </div>
+                    <div class="daily-tip">
+                        <span class="material-icons">tips_and_updates</span>
+                        <span id="tipText">Loading tip...</span>
+                    </div>
                 </div>
+
             </div>
 
         </div>
