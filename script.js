@@ -130,14 +130,44 @@ const savedReminder = localStorage.getItem('rmt_reminder');
 if (savedReminder) scheduleReminder(JSON.parse(savedReminder).time);
 
 // ---- GitHub API ----
-async function fetchGitHub() {
+async function fetchGitHub(forceRefresh = false) {
     try {
-        const [userRes, repoRes] = await Promise.all([
-            fetch(`https://api.github.com/users/${GH_USER}`),
-            fetch(`https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=30`)
-        ]);
-        const user = await userRes.json();
-        const repos = await repoRes.json();
+        const CACHE_KEY = 'rmt_gh_cache';
+        const CACHE_MINS = 30;
+        let user, repos;
+        
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (!forceRefresh && cached) {
+            const parsed = JSON.parse(cached);
+            if (Date.now() - parsed.timestamp < CACHE_MINS * 60000) {
+                user = parsed.user;
+                repos = parsed.repos;
+            }
+        }
+
+        if (!user || !repos) {
+            document.getElementById('repoCount').textContent = 'Fetching...';
+            const [userRes, repoRes] = await Promise.all([
+                fetch(`https://api.github.com/users/${GH_USER}`),
+                fetch(`https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=30`)
+            ]);
+            
+            if (!userRes.ok || !repoRes.ok) {
+                if (cached) {
+                    // Fallback to expired cache if API is rate limited
+                    const parsed = JSON.parse(cached);
+                    user = parsed.user;
+                    repos = parsed.repos;
+                    console.warn("API limit reached. Using expired cache.");
+                } else {
+                    throw new Error("API Limit Reached & No Cache");
+                }
+            } else {
+                user = await userRes.json();
+                repos = await repoRes.json();
+                localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), user, repos }));
+            }
+        }
 
         document.getElementById('ghAvatar').src = user.avatar_url || `https://github.com/${GH_USER}.png`;
         document.getElementById('ghRepos').textContent = user.public_repos ?? '—';
@@ -337,7 +367,13 @@ document.getElementById('todoClearDone').addEventListener('click', () => {
 });
 
 // ---- Refresh ----
-document.getElementById('refreshBtn').addEventListener('click', fetchGitHub);
+document.getElementById('refreshBtn').addEventListener('click', () => {
+    const btn = document.getElementById('refreshBtn');
+    btn.style.transition = 'transform 0.3s ease';
+    btn.style.transform = 'rotate(180deg)';
+    setTimeout(() => { btn.style.transition = 'none'; btn.style.transform = 'rotate(0deg)'; }, 300);
+    fetchGitHub(true);
+});
 
 // ---- Init ----
 loadXStats(); loadGoal(); renderTodos(); fetchGitHub();
