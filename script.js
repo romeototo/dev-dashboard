@@ -6,7 +6,7 @@ const GH_USER = 'romeototo';
 const PLAY_LINKS = {
     'ai-tycoon-rialo-game': 'https://romeototo.github.io/ai-tycoon-rialo-game/',
     'monster-tapper': 'https://romeototo.github.io/monster-tapper/',
-    'MyFirstProject': 'https://romeototo.github.io/MyFirstProject/',
+    'portfolio-website': 'https://romeototo.github.io/portfolio-website/',
 };
 const TIPS = [
     "Ship something small every day — consistency beats perfection.",
@@ -199,7 +199,7 @@ function renderMiniGraph(repos) {
 function renderRepos(repos) {
     const grid = document.getElementById('reposGrid');
     grid.innerHTML = '';
-    const priority = ['ai-tycoon-rialo-game','monster-tapper','MyFirstProject','telegram-ai-it-automation-agent','dev-dashboard'];
+    const priority = ['ai-tycoon-rialo-game','monster-tapper','portfolio-website','telegram-ai-it-automation-agent','dev-dashboard'];
     repos.sort((a,b) => {
         const ai = priority.indexOf(a.name), bi = priority.indexOf(b.name);
         if (ai !== -1 && bi !== -1) return ai - bi;
