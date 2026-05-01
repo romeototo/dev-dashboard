@@ -223,3 +223,8 @@ body { font-family: var(--font); background: var(--bg); color: var(--text); min-
     .links-grid { grid-template-columns:repeat(2,1fr); }
     .game-card { flex-wrap:wrap; }
 }
+ 
+ / *   A d d e d   H o v e r   A n i m a t i o n s   * /  
+ . r e p o - i t e m : h o v e r ,   . g a m e - c a r d : h o v e r   {   t r a n s f o r m :   t r a n s l a t e Y ( - 5 p x ) ;   b o x - s h a d o w :   0   1 0 p x   2 0 p x   r g b a ( 0 , 0 , 0 , 0 . 3 ) ;   b o r d e r - c o l o r :   v a r ( - - p r i m a r y ) ;   }  
+ . c a r d : h o v e r   {   t r a n s f o r m :   t r a n s l a t e Y ( - 2 p x ) ;   }  
+ 

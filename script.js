@@ -3,10 +3,17 @@
    ====================================== */
 
 const GH_USER = 'romeototo';
-const PLAY_LINKS = {
-    'ai-tycoon-rialo-game': 'https://romeototo.github.io/ai-tycoon-rialo-game/',
-    'monster-tapper': 'https://romeototo.github.io/monster-tapper/',
-    'portfolio-website': 'https://romeototo.github.io/portfolio-website/',
+const DEMO_LINKS = {
+    'ai-tycoon-rialo-game': { url: 'https://romeototo.github.io/ai-tycoon-rialo-game/', label: 'Play Game', icon: 'play_arrow' },
+    'monster-tapper': { url: 'https://romeototo.github.io/monster-tapper/', label: 'Play Game', icon: 'play_arrow' },
+    'portfolio-website': { url: 'https://romeototo.github.io/portfolio-website/', label: 'View Site', icon: 'open_in_new' },
+    'telegram-ai-it-automation-agent': { url: 'https://github.com/romeototo/telegram-ai-it-automation-agent', label: 'View Repo', icon: 'code' },
+    'resume': { url: 'https://romeototo.github.io/resume/', label: 'View CV', icon: 'article' }
+};
+
+const DESC_FALLBACK = {
+    'resume': 'My professional resume and curriculum vitae.',
+    'portfolio-website': 'My main portfolio and project showcase.'
 };
 const TIPS = [
     "Ship something small every day — consistency beats perfection.",
@@ -209,11 +216,12 @@ function renderRepos(repos) {
         const item = document.createElement('a');
         item.className = 'repo-item';
         item.href = repo.html_url; item.target = '_blank';
-        const playLink = PLAY_LINKS[repo.name];
-        const playBtn = playLink ? `<a href="${playLink}" target="_blank" class="repo-play" onclick="event.stopPropagation()"><span class="material-icons">play_arrow</span>Play</a>` : '';
+        const demo = DEMO_LINKS[repo.name];
+        const playBtn = demo ? `<a href="${demo.url}" target="_blank" class="repo-play" onclick="event.stopPropagation()"><span class="material-icons">${demo.icon}</span>${demo.label}</a>` : '';
+        const desc = repo.description || DESC_FALLBACK[repo.name] || 'No description provided';
         item.innerHTML = `
             <div class="repo-name"><span class="material-icons">folder_open</span>${repo.name.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</div>
-            <div class="repo-desc">${repo.description||'No description'}</div>
+            <div class="repo-desc">${desc}</div>
             <div class="repo-meta">
                 <span class="repo-lang"><span class="material-icons">circle</span>${repo.language||'HTML'}</span>
                 <span class="repo-stars"><span class="material-icons">star</span>${repo.stargazers_count}</span>
