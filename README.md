@@ -2,6 +2,8 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6C63FF,100:00D9FF&height=160&section=header&text=Dev%20Dashboard&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=40&desc=Personal%20Developer%20Hub%20by%20RoMeoTOTO&descAlignY=62&descSize=16" width="100%" />
 
+<i>👉 <a href="README-th.md">🇹🇭 อ่านรายละเอียดภาษาไทย</a></i><br><br>
+
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-6C63FF?style=for-the-badge&logoColor=white)](https://romeototo.github.io/dev-dashboard/)
 [![GitHub](https://img.shields.io/badge/romeototo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/romeototo)
 [![X](https://img.shields.io/badge/@RoMeoT0T0-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/RoMeoT0T0)
