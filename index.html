@@ -1,317 +1,460 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RoMeoTOTO — Dev Dashboard</title>
-    <meta name="description" content="Personal developer dashboard for romeototo">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <meta
+      name="description"
+      content="Personal developer dashboard for romeototo"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="bg-grid"></div>
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
 
     <div class="dashboard">
+      <!-- Header -->
+      <header class="dash-header">
+        <div class="header-left">
+          <div class="avatar-wrap">
+            <img
+              id="ghAvatar"
+              src="https://github.com/romeototo.png"
+              alt="avatar"
+              class="avatar"
+            />
+            <span class="avatar-status"></span>
+          </div>
+          <div>
+            <h1 id="greeting" class="greeting">Good morning, RoMeoTOTO 👋</h1>
+            <p class="subgreeting">
+              RoMEoTOTO.base.eth · Bangkok 🇹🇭 ·
+              <span id="liveTime" class="live-time"></span>
+            </p>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-badge">
+            <span class="material-icons">circle</span>
+            <span>Available for collab</span>
+          </div>
+          <!-- 🔔 Reminder Button -->
+          <button class="icon-btn" id="reminderBtn" title="Set commit reminder">
+            <span class="material-icons">notifications</span>
+          </button>
+          <!-- 🌙 Dark/Light Toggle -->
+          <button
+            class="icon-btn"
+            id="themeToggle"
+            title="Toggle light/dark mode"
+          >
+            <span class="material-icons" id="themeIcon">light_mode</span>
+          </button>
+          <button class="icon-btn" id="refreshBtn" title="Refresh data">
+            <span class="material-icons">refresh</span>
+          </button>
+        </div>
+      </header>
 
-        <!-- Header -->
-        <header class="dash-header">
-            <div class="header-left">
-                <div class="avatar-wrap">
-                    <img id="ghAvatar" src="https://github.com/romeototo.png" alt="avatar" class="avatar" />
-                    <span class="avatar-status"></span>
-                </div>
-                <div>
-                    <h1 id="greeting" class="greeting">Good morning, RoMeoTOTO 👋</h1>
-                    <p class="subgreeting">RoMEoTOTO.base.eth · Bangkok 🇹🇭 · <span id="liveTime" class="live-time"></span></p>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="header-badge">
-                    <span class="material-icons">circle</span>
-                    <span>Available for collab</span>
-                </div>
-                <!-- 🔔 Reminder Button -->
-                <button class="icon-btn" id="reminderBtn" title="Set commit reminder">
-                    <span class="material-icons">notifications</span>
-                </button>
-                <!-- 🌙 Dark/Light Toggle -->
-                <button class="icon-btn" id="themeToggle" title="Toggle light/dark mode">
-                    <span class="material-icons" id="themeIcon">light_mode</span>
-                </button>
-                <button class="icon-btn" id="refreshBtn" title="Refresh data">
-                    <span class="material-icons">refresh</span>
-                </button>
-            </div>
-        </header>
+      <!-- Reminder Modal -->
+      <div class="modal-overlay" id="reminderModal">
+        <div class="modal">
+          <div class="modal-header">
+            <span class="material-icons" style="color: var(--orange)"
+              >alarm</span
+            >
+            <h3>Commit Reminder</h3>
+            <button class="modal-close" id="modalClose">
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+          <p class="modal-desc">
+            Get a browser notification so you never forget to commit today.
+          </p>
+          <div class="modal-row">
+            <label>Remind me at:</label>
+            <input
+              type="time"
+              id="reminderTime"
+              class="time-input"
+              value="21:00"
+            />
+          </div>
+          <div id="reminderStatus" class="reminder-status"></div>
+          <div class="modal-actions">
+            <button class="btn-set" id="setReminderBtn">
+              <span class="material-icons">alarm_add</span> Set Reminder
+            </button>
+            <button class="btn-cancel" id="cancelReminderBtn">
+              <span class="material-icons">alarm_off</span> Cancel
+            </button>
+          </div>
+        </div>
+      </div>
 
-        <!-- Reminder Modal -->
-        <div class="modal-overlay" id="reminderModal">
-            <div class="modal">
-                <div class="modal-header">
-                    <span class="material-icons" style="color:var(--orange)">alarm</span>
-                    <h3>Commit Reminder</h3>
-                    <button class="modal-close" id="modalClose"><span class="material-icons">close</span></button>
-                </div>
-                <p class="modal-desc">Get a browser notification so you never forget to commit today.</p>
-                <div class="modal-row">
-                    <label>Remind me at:</label>
-                    <input type="time" id="reminderTime" class="time-input" value="21:00" />
-                </div>
-                <div id="reminderStatus" class="reminder-status"></div>
-                <div class="modal-actions">
-                    <button class="btn-set" id="setReminderBtn"><span class="material-icons">alarm_add</span> Set Reminder</button>
-                    <button class="btn-cancel" id="cancelReminderBtn"><span class="material-icons">alarm_off</span> Cancel</button>
-                </div>
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <!-- GitHub Stats -->
+        <div class="card card-github">
+          <div class="card-header">
+            <span class="material-icons card-icon">code</span>
+            <h2 class="card-title">GitHub</h2>
+            <span class="card-sub">@romeototo</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-item">
+              <span class="material-icons stat-icon">folder</span>
+              <span class="stat-val" id="ghRepos">—</span>
+              <span class="stat-label">Repos</span>
             </div>
+            <div class="stat-item">
+              <span class="material-icons stat-icon">people</span>
+              <span class="stat-val" id="ghFollowers">—</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-item">
+              <span class="material-icons stat-icon">favorite</span>
+              <span class="stat-val" id="ghFollowing">—</span>
+              <span class="stat-label">Following</span>
+            </div>
+            <div class="stat-item">
+              <span class="material-icons stat-icon">star</span>
+              <span class="stat-val" id="ghStars">—</span>
+              <span class="stat-label">Stars</span>
+            </div>
+          </div>
+          <a
+            href="https://github.com/romeototo"
+            target="_blank"
+            class="card-link"
+          >
+            <span class="material-icons">open_in_new</span> View Profile
+          </a>
         </div>
 
-        <!-- Stats Row -->
-        <div class="stats-row">
-
-            <!-- GitHub Stats -->
-            <div class="card card-github">
-                <div class="card-header">
-                    <span class="material-icons card-icon">code</span>
-                    <h2 class="card-title">GitHub</h2>
-                    <span class="card-sub">@romeototo</span>
-                </div>
-                <div class="stat-grid">
-                    <div class="stat-item">
-                        <span class="material-icons stat-icon">folder</span>
-                        <span class="stat-val" id="ghRepos">—</span>
-                        <span class="stat-label">Repos</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="material-icons stat-icon">people</span>
-                        <span class="stat-val" id="ghFollowers">—</span>
-                        <span class="stat-label">Followers</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="material-icons stat-icon">favorite</span>
-                        <span class="stat-val" id="ghFollowing">—</span>
-                        <span class="stat-label">Following</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="material-icons stat-icon">star</span>
-                        <span class="stat-val" id="ghStars">—</span>
-                        <span class="stat-label">Stars</span>
-                    </div>
-                </div>
-                <a href="https://github.com/romeototo" target="_blank" class="card-link">
-                    <span class="material-icons">open_in_new</span> View Profile
-                </a>
+        <!-- X / Twitter Stats -->
+        <div class="card card-x">
+          <div class="card-header">
+            <span class="card-icon x-icon">𝕏</span>
+            <h2 class="card-title">X / Twitter</h2>
+            <span class="card-sub">@RoMeoT0T0</span>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-item">
+              <span class="material-icons stat-icon">group</span>
+              <span
+                class="stat-val x-editable"
+                id="xFollowers"
+                contenteditable="true"
+                title="Click to edit"
+                >1,844</span
+              >
+              <span class="stat-label">Followers</span>
             </div>
-
-            <!-- X / Twitter Stats -->
-            <div class="card card-x">
-                <div class="card-header">
-                    <span class="card-icon x-icon">𝕏</span>
-                    <h2 class="card-title">X / Twitter</h2>
-                    <span class="card-sub">@RoMeoT0T0</span>
-                </div>
-                <div class="stat-grid">
-                    <div class="stat-item">
-                        <span class="material-icons stat-icon">group</span>
-                        <span class="stat-val x-editable" id="xFollowers" contenteditable="true" title="Click to edit">1,844</span>
-                        <span class="stat-label">Followers</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="material-icons stat-icon">chat_bubble</span>
-                        <span class="stat-val x-editable" id="xPosts" contenteditable="true" title="Click to edit">25,608</span>
-                        <span class="stat-label">Posts</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="material-icons stat-icon">person_add</span>
-                        <span class="stat-val x-editable" id="xFollowing" contenteditable="true" title="Click to edit">6,277</span>
-                        <span class="stat-label">Following</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="material-icons stat-icon">image</span>
-                        <span class="stat-val x-editable" id="xMedia" contenteditable="true" title="Click to edit">1,509</span>
-                        <span class="stat-label">Media</span>
-                    </div>
-                </div>
-                <p class="edit-hint"><span class="material-icons" style="font-size:12px">edit</span> Click numbers to update</p>
-                <a href="https://x.com/RoMeoT0T0" target="_blank" class="card-link">
-                    <span class="material-icons">open_in_new</span> View Profile
-                </a>
+            <div class="stat-item">
+              <span class="material-icons stat-icon">chat_bubble</span>
+              <span
+                class="stat-val x-editable"
+                id="xPosts"
+                contenteditable="true"
+                title="Click to edit"
+                >25,608</span
+              >
+              <span class="stat-label">Posts</span>
             </div>
-
-            <!-- Streak / Activity -->
-            <div class="card card-streak">
-                <div class="card-header">
-                    <span class="material-icons card-icon" style="color:#FF9F43">local_fire_department</span>
-                    <h2 class="card-title">Activity</h2>
-                </div>
-                <div class="streak-main">
-                    <div class="streak-number" id="streakDays">0</div>
-                    <div class="streak-label">Day Streak 🔥</div>
-                </div>
-                <div class="streak-meta">
-                    <div class="streak-meta-item">
-                        <span class="material-icons">today</span>
-                        <span>Last commit: <strong id="lastCommitDate">—</strong></span>
-                    </div>
-                    <div class="streak-meta-item">
-                        <span class="material-icons">history</span>
-                        <span>Total repos: <strong id="totalRepos">—</strong></span>
-                    </div>
-                </div>
-                <div class="mini-graph" id="miniGraph"></div>
+            <div class="stat-item">
+              <span class="material-icons stat-icon">person_add</span>
+              <span
+                class="stat-val x-editable"
+                id="xFollowing"
+                contenteditable="true"
+                title="Click to edit"
+                >6,277</span
+              >
+              <span class="stat-label">Following</span>
             </div>
-
+            <div class="stat-item">
+              <span class="material-icons stat-icon">image</span>
+              <span
+                class="stat-val x-editable"
+                id="xMedia"
+                contenteditable="true"
+                title="Click to edit"
+                >1,509</span
+              >
+              <span class="stat-label">Media</span>
+            </div>
+          </div>
+          <p class="edit-hint">
+            <span class="material-icons" style="font-size: 12px">edit</span>
+            Click numbers to update
+          </p>
+          <a href="https://x.com/RoMeoT0T0" target="_blank" class="card-link">
+            <span class="material-icons">open_in_new</span> View Profile
+          </a>
         </div>
 
-        <!-- 🎮 Game Shortcuts -->
-        <div class="card card-games">
+        <!-- Streak / Activity -->
+        <div class="card card-streak">
+          <div class="card-header">
+            <span class="material-icons card-icon" style="color: #ff9f43"
+              >local_fire_department</span
+            >
+            <h2 class="card-title">Activity</h2>
+          </div>
+          <div class="streak-main">
+            <div class="streak-number" id="streakDays">0</div>
+            <div class="streak-label">Day Streak 🔥</div>
+          </div>
+          <div class="streak-meta">
+            <div class="streak-meta-item">
+              <span class="material-icons">today</span>
+              <span>Last commit: <strong id="lastCommitDate">—</strong></span>
+            </div>
+            <div class="streak-meta-item">
+              <span class="material-icons">history</span>
+              <span>Total repos: <strong id="totalRepos">—</strong></span>
+            </div>
+          </div>
+          <div class="mini-graph" id="miniGraph"></div>
+        </div>
+      </div>
+
+      <!-- 🎮 Game Shortcuts -->
+      <div class="card card-games">
+        <div class="card-header">
+          <span class="material-icons card-icon" style="color: #ff6b9d"
+            >videogame_asset</span
+          >
+          <h2 class="card-title">Play My Games</h2>
+          <span class="card-sub">Live on GitHub Pages</span>
+        </div>
+        <div class="games-grid">
+          <a
+            href="https://romeototo.github.io/ai-tycoon-rialo-game/"
+            target="_blank"
+            class="game-card"
+          >
+            <div class="game-thumb game-thumb-1">
+              <span class="material-icons game-icon">hub</span>
+            </div>
+            <div class="game-info">
+              <div class="game-name">Rialo Network Tycoon</div>
+              <div class="game-desc">
+                Idle clicker · Build validator nodes · Earn $RIA
+              </div>
+              <div class="game-tags">
+                <span class="game-tag">Web3 Theme</span>
+                <span class="game-tag">Idle</span>
+                <span class="game-tag">Prestige</span>
+              </div>
+            </div>
+            <button class="play-btn">
+              <span class="material-icons">play_arrow</span> Play
+            </button>
+          </a>
+          <a
+            href="https://romeototo.github.io/monster-tapper/"
+            target="_blank"
+            class="game-card"
+          >
+            <div class="game-thumb game-thumb-2">
+              <span class="material-icons game-icon">pest_control</span>
+            </div>
+            <div class="game-info">
+              <div class="game-name">Monster Tapper</div>
+              <div class="game-desc">
+                Tap monsters · Boss battles · Upgrade heroes
+              </div>
+              <div class="game-tags">
+                <span class="game-tag">Clicker</span>
+                <span class="game-tag">Boss Fights</span>
+                <span class="game-tag">10 Stages</span>
+              </div>
+            </div>
+            <button class="play-btn play-btn-2">
+              <span class="material-icons">play_arrow</span> Play
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pinned Repos -->
+      <div class="card card-repos">
+        <div class="card-header">
+          <span class="material-icons card-icon">push_pin</span>
+          <h2 class="card-title">Featured Projects</h2>
+          <span class="card-sub" id="repoCount">Loading...</span>
+        </div>
+        <div class="repos-grid" id="reposGrid"></div>
+      </div>
+
+      <!-- Bottom Row -->
+      <div class="bottom-row">
+        <!-- Todo List -->
+        <div class="card card-todo">
+          <div class="card-header">
+            <span class="material-icons card-icon" style="color: #00ff88"
+              >checklist</span
+            >
+            <h2 class="card-title">Today's Tasks</h2>
+            <span class="todo-count" id="todoCount">0/0</span>
+          </div>
+          <div class="todo-input-row">
+            <span class="material-icons input-icon">add_task</span>
+            <input
+              type="text"
+              id="todoInput"
+              class="todo-input"
+              placeholder="Add a task..."
+              maxlength="80"
+            />
+            <button class="todo-add-btn" id="todoAddBtn">
+              <span class="material-icons">add</span>
+            </button>
+          </div>
+          <ul class="todo-list" id="todoList"></ul>
+          <div class="todo-actions">
+            <button class="todo-clear-btn" id="todoClearDone">
+              <span class="material-icons">cleaning_services</span> Clear done
+            </button>
+          </div>
+        </div>
+
+        <!-- Weekly Goal + Quick Links -->
+        <div class="right-col">
+          <!-- 📅 Weekly Goal -->
+          <div class="card card-goal">
             <div class="card-header">
-                <span class="material-icons card-icon" style="color:#FF6B9D">videogame_asset</span>
-                <h2 class="card-title">Play My Games</h2>
-                <span class="card-sub">Live on GitHub Pages</span>
+              <span class="material-icons card-icon" style="color: #feca57"
+                >emoji_events</span
+              >
+              <h2 class="card-title">Weekly Goal</h2>
+              <button class="edit-goal-btn" id="editGoalBtn" title="Edit goal">
+                <span class="material-icons">edit</span>
+              </button>
             </div>
-            <div class="games-grid">
-                <a href="https://romeototo.github.io/ai-tycoon-rialo-game/" target="_blank" class="game-card">
-                    <div class="game-thumb game-thumb-1">
-                        <span class="material-icons game-icon">hub</span>
-                    </div>
-                    <div class="game-info">
-                        <div class="game-name">Rialo Network Tycoon</div>
-                        <div class="game-desc">Idle clicker · Build validator nodes · Earn $RIA</div>
-                        <div class="game-tags">
-                            <span class="game-tag">Web3 Theme</span>
-                            <span class="game-tag">Idle</span>
-                            <span class="game-tag">Prestige</span>
-                        </div>
-                    </div>
-                    <button class="play-btn"><span class="material-icons">play_arrow</span> Play</button>
-                </a>
-                <a href="https://romeototo.github.io/monster-tapper/" target="_blank" class="game-card">
-                    <div class="game-thumb game-thumb-2">
-                        <span class="material-icons game-icon">pest_control</span>
-                    </div>
-                    <div class="game-info">
-                        <div class="game-name">Monster Tapper</div>
-                        <div class="game-desc">Tap monsters · Boss battles · Upgrade heroes</div>
-                        <div class="game-tags">
-                            <span class="game-tag">Clicker</span>
-                            <span class="game-tag">Boss Fights</span>
-                            <span class="game-tag">10 Stages</span>
-                        </div>
-                    </div>
-                    <button class="play-btn play-btn-2"><span class="material-icons">play_arrow</span> Play</button>
-                </a>
+            <div id="goalDisplay">
+              <div class="goal-text" id="goalText">
+                No goal set — click ✏️ to add one
+              </div>
+              <div class="goal-progress-wrap">
+                <div class="goal-progress-bar">
+                  <div
+                    class="goal-progress-fill"
+                    id="goalFill"
+                    style="width: 0%"
+                  ></div>
+                </div>
+                <div class="goal-progress-label">
+                  <span id="goalCurrent">0</span> /
+                  <span id="goalTarget">7</span> commits this week
+                </div>
+              </div>
             </div>
-        </div>
+            <div id="goalEdit" style="display: none">
+              <input
+                type="text"
+                id="goalInput"
+                class="todo-input"
+                placeholder="e.g. Ship game update"
+                maxlength="60"
+              />
+              <div class="goal-edit-row">
+                <label style="font-size: 0.8rem; color: var(--text2)"
+                  >Target commits:</label
+                >
+                <input
+                  type="number"
+                  id="goalTargetInput"
+                  class="num-input"
+                  value="7"
+                  min="1"
+                  max="30"
+                />
+                <button class="btn-set" id="saveGoalBtn">
+                  <span class="material-icons">save</span> Save
+                </button>
+              </div>
+            </div>
+          </div>
 
-        <!-- Pinned Repos -->
-        <div class="card card-repos">
+          <!-- Quick Links -->
+          <div class="card card-links">
             <div class="card-header">
-                <span class="material-icons card-icon">push_pin</span>
-                <h2 class="card-title">Featured Projects</h2>
-                <span class="card-sub" id="repoCount">Loading...</span>
+              <span class="material-icons card-icon" style="color: #00d9ff"
+                >rocket_launch</span
+              >
+              <h2 class="card-title">Quick Links</h2>
             </div>
-            <div class="repos-grid" id="reposGrid"></div>
+            <div class="links-grid">
+              <a
+                href="https://romeototo.github.io/portfolio-website/"
+                target="_blank"
+                class="quick-link"
+              >
+                <span class="material-icons">person</span><span>Portfolio</span>
+              </a>
+              <a
+                href="https://github.com/romeototo"
+                target="_blank"
+                class="quick-link"
+              >
+                <span class="material-icons">code</span><span>GitHub</span>
+              </a>
+              <a
+                href="https://x.com/RoMeoT0T0"
+                target="_blank"
+                class="quick-link"
+              >
+                <span class="x-icon-sm">𝕏</span><span>@RoMeoT0T0</span>
+              </a>
+              <a
+                href="https://github.com/romeototo/telegram-ai-it-automation-agent"
+                target="_blank"
+                class="quick-link"
+              >
+                <span class="material-icons">smart_toy</span
+                ><span>TG AI Agent</span>
+              </a>
+              <a
+                href="https://github.com/romeototo/dev-dashboard"
+                target="_blank"
+                class="quick-link"
+              >
+                <span class="material-icons">dashboard</span
+                ><span>This Repo</span>
+              </a>
+              <a
+                href="https://romeototo.github.io/dev-dashboard/"
+                target="_blank"
+                class="quick-link"
+              >
+                <span class="material-icons">open_in_new</span
+                ><span>Live Demo</span>
+              </a>
+            </div>
+            <div class="daily-tip">
+              <span class="material-icons">tips_and_updates</span>
+              <span id="tipText">Loading tip...</span>
+            </div>
+          </div>
         </div>
-
-        <!-- Bottom Row -->
-        <div class="bottom-row">
-
-            <!-- Todo List -->
-            <div class="card card-todo">
-                <div class="card-header">
-                    <span class="material-icons card-icon" style="color:#00FF88">checklist</span>
-                    <h2 class="card-title">Today's Tasks</h2>
-                    <span class="todo-count" id="todoCount">0/0</span>
-                </div>
-                <div class="todo-input-row">
-                    <span class="material-icons input-icon">add_task</span>
-                    <input type="text" id="todoInput" class="todo-input" placeholder="Add a task..." maxlength="80" />
-                    <button class="todo-add-btn" id="todoAddBtn">
-                        <span class="material-icons">add</span>
-                    </button>
-                </div>
-                <ul class="todo-list" id="todoList"></ul>
-                <div class="todo-actions">
-                    <button class="todo-clear-btn" id="todoClearDone">
-                        <span class="material-icons">cleaning_services</span> Clear done
-                    </button>
-                </div>
-            </div>
-
-            <!-- Weekly Goal + Quick Links -->
-            <div class="right-col">
-
-                <!-- 📅 Weekly Goal -->
-                <div class="card card-goal">
-                    <div class="card-header">
-                        <span class="material-icons card-icon" style="color:#FECA57">emoji_events</span>
-                        <h2 class="card-title">Weekly Goal</h2>
-                        <button class="edit-goal-btn" id="editGoalBtn" title="Edit goal">
-                            <span class="material-icons">edit</span>
-                        </button>
-                    </div>
-                    <div id="goalDisplay">
-                        <div class="goal-text" id="goalText">No goal set — click ✏️ to add one</div>
-                        <div class="goal-progress-wrap">
-                            <div class="goal-progress-bar">
-                                <div class="goal-progress-fill" id="goalFill" style="width:0%"></div>
-                            </div>
-                            <div class="goal-progress-label">
-                                <span id="goalCurrent">0</span> / <span id="goalTarget">7</span> commits this week
-                            </div>
-                        </div>
-                    </div>
-                    <div id="goalEdit" style="display:none">
-                        <input type="text" id="goalInput" class="todo-input" placeholder="e.g. Ship game update" maxlength="60" />
-                        <div class="goal-edit-row">
-                            <label style="font-size:.8rem;color:var(--text2)">Target commits:</label>
-                            <input type="number" id="goalTargetInput" class="num-input" value="7" min="1" max="30" />
-                            <button class="btn-set" id="saveGoalBtn"><span class="material-icons">save</span> Save</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="card card-links">
-                    <div class="card-header">
-                        <span class="material-icons card-icon" style="color:#00D9FF">rocket_launch</span>
-                        <h2 class="card-title">Quick Links</h2>
-                    </div>
-                    <div class="links-grid">
-                        <a href="https://romeototo.github.io/portfolio-website/" target="_blank" class="quick-link">
-                            <span class="material-icons">person</span><span>Portfolio</span>
-                        </a>
-                        <a href="https://github.com/romeototo" target="_blank" class="quick-link">
-                            <span class="material-icons">code</span><span>GitHub</span>
-                        </a>
-                        <a href="https://x.com/RoMeoT0T0" target="_blank" class="quick-link">
-                            <span class="x-icon-sm">𝕏</span><span>@RoMeoT0T0</span>
-                        </a>
-                        <a href="https://github.com/romeototo/telegram-ai-it-automation-agent" target="_blank" class="quick-link">
-                            <span class="material-icons">smart_toy</span><span>TG AI Agent</span>
-                        </a>
-                        <a href="https://github.com/romeototo/dev-dashboard" target="_blank" class="quick-link">
-                            <span class="material-icons">dashboard</span><span>This Repo</span>
-                        </a>
-                        <a href="https://romeototo.github.io/dev-dashboard/" target="_blank" class="quick-link">
-                            <span class="material-icons">open_in_new</span><span>Live Demo</span>
-                        </a>
-                    </div>
-                    <div class="daily-tip">
-                        <span class="material-icons">tips_and_updates</span>
-                        <span id="tipText">Loading tip...</span>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div><!-- /dashboard -->
+      </div>
+    </div>
+    <!-- /dashboard -->
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

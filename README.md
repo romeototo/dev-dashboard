@@ -20,29 +20,31 @@
 
 ## ✨ Features
 
-| Feature | Description |
-|:-------:|-------------|
-| 📊 **GitHub Stats** | Live data via GitHub API — repos, followers, stars |
-| 𝕏 **X / Twitter Stats** | Editable stats saved to localStorage |
-| 🔥 **Commit Streak** | Visual activity bar graph + streak counter |
-| 🎮 **Game Shortcuts** | One-click launch to Rialo Tycoon & Monster Tapper |
-| ✅ **Todo List** | Daily tasks with done/delete, persisted locally |
-| 📅 **Weekly Goal** | Set weekly commit target with live progress bar |
-| 🔔 **Commit Reminder** | Browser notification at your chosen time |
-| 🌙 **Dark / Light Mode** | Toggle theme, saved to localStorage |
-| 🔗 **Quick Links** | All projects accessible in one click |
-| 💡 **Daily Tip** | Rotates dev wisdom daily |
+|         Feature          | Description                                        |
+| :----------------------: | -------------------------------------------------- |
+|   📊 **GitHub Stats**    | Live data via GitHub API — repos, followers, stars |
+| 𝕏 **X / Twitter Stats**  | Editable stats saved to localStorage               |
+|   🔥 **Commit Streak**   | Visual activity bar graph + streak counter         |
+|  🎮 **Game Shortcuts**   | One-click launch to Rialo Tycoon & Monster Tapper  |
+|     ✅ **Todo List**     | Daily tasks with done/delete, persisted locally    |
+|    📅 **Weekly Goal**    | Set weekly commit target with live progress bar    |
+|  🔔 **Commit Reminder**  | Browser notification at your chosen time           |
+| 🌙 **Dark / Light Mode** | Toggle theme, saved to localStorage                |
+|    🔗 **Quick Links**    | All projects accessible in one click               |
+|     💡 **Daily Tip**     | Rotates dev wisdom daily                           |
 
 ---
 
 ## 🚀 Getting Started
 
 **Option 1 — Open directly (no server needed for basic use)**
+
 ```bash
 open index.html
 ```
 
 **Option 2 — Run local server (recommended for API features)**
+
 ```bash
 python -m http.server 8080
 # Then open: http://localhost:8080
@@ -85,9 +87,9 @@ dev-dashboard/
 To use this as your own dashboard, edit these constants in `script.js`:
 
 ```javascript
-const GH_USER = 'your-github-username';   // Your GitHub username
+const GH_USER = "your-github-username"; // Your GitHub username
 const PLAY_LINKS = {
-    'your-repo-name': 'https://your-live-url.com/',
+  "your-repo-name": "https://your-live-url.com/",
 };
 ```
 
@@ -97,10 +99,10 @@ const PLAY_LINKS = {
 
 ### 🎮 My Games
 
-| | Game | Play |
-|:--:|------|:----:|
-| 🎮 | **Rialo Network Tycoon** — Idle Web3 game | [▶ Play](https://romeototo.github.io/ai-tycoon-rialo-game/) |
-| 👾 | **Monster Tapper** — Clicker + Boss Battles | [▶ Play](https://romeototo.github.io/monster-tapper/) |
+|     | Game                                        |                            Play                             |
+| :-: | ------------------------------------------- | :---------------------------------------------------------: |
+| 🎮  | **Rialo Network Tycoon** — Idle Web3 game   | [▶ Play](https://romeototo.github.io/ai-tycoon-rialo-game/) |
+| 👾  | **Monster Tapper** — Clicker + Boss Battles |    [▶ Play](https://romeototo.github.io/monster-tapper/)    |
 
 ---
 

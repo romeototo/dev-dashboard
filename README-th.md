@@ -3,6 +3,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6C63FF,100:00D9FF&height=160&section=header&text=Dev%20Dashboard&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=40&desc=Personal%20Developer%20Hub%20by%20RoMeoTOTO&descAlignY=62&descSize=16" width="100%" />
 
 # 📊 หน้าแดชบอร์ดนักพัฒนา (Dev Dashboard)
+
 **ศูนย์กลางการควบคุมส่วนตัวสำหรับนักพัฒนาโดย RoMeoTOTO**
 
 <i>👉 <a href="README.md">🇬🇧 Read in English</a></i><br><br>
@@ -23,18 +24,18 @@
 
 ## ✨ ฟีเจอร์หลัก
 
-| ฟีเจอร์ | รายละเอียด |
-|:-------:|-------------|
-| 📊 **GitHub Stats** | ข้อมูลสดผ่าน GitHub API — จำนวน Repo, ผู้ติดตาม, ดาว |
-| 𝕏 **X / Twitter Stats** | แก้ไขข้อมูลสถิติและบันทึกลง localStorage |
-| 🔥 **Commit Streak** | กราฟแท่งแสดงกิจกรรมการ Commit พร้อมตัวนับ Streak |
-| 🎮 **Game Shortcuts** | ทางลัดเข้าเล่นเกม Rialo Tycoon และ Monster Tapper ในคลิกเดียว |
-| ✅ **Todo List** | รายการงานรายวันพร้อมระบบบันทึกความคืบหน้าถาวรในเครื่อง |
-| 📅 **Weekly Goal** | ตั้งเป้าหมายการ Commit รายสัปดาห์พร้อมแถบแสดงความคืบหน้า |
-| 🔔 **Commit Reminder** | ระบบแจ้งเตือนผ่านเบราว์เซอร์ตามเวลาที่กำหนด |
-| 🌙 **Dark / Light Mode** | สลับธีมมืด/สว่าง และจดจำค่าไว้ในเครื่อง |
-| 🔗 **Quick Links** | เข้าถึงโปรเจกต์ทั้งหมดได้จากที่เดียว |
-| 💡 **Daily Tip** | คำแนะนำสำหรับนักพัฒนาที่เปลี่ยนไปในทุกๆ วัน |
+|         ฟีเจอร์          | รายละเอียด                                                    |
+| :----------------------: | ------------------------------------------------------------- |
+|   📊 **GitHub Stats**    | ข้อมูลสดผ่าน GitHub API — จำนวน Repo, ผู้ติดตาม, ดาว          |
+| 𝕏 **X / Twitter Stats**  | แก้ไขข้อมูลสถิติและบันทึกลง localStorage                      |
+|   🔥 **Commit Streak**   | กราฟแท่งแสดงกิจกรรมการ Commit พร้อมตัวนับ Streak              |
+|  🎮 **Game Shortcuts**   | ทางลัดเข้าเล่นเกม Rialo Tycoon และ Monster Tapper ในคลิกเดียว |
+|     ✅ **Todo List**     | รายการงานรายวันพร้อมระบบบันทึกความคืบหน้าถาวรในเครื่อง        |
+|    📅 **Weekly Goal**    | ตั้งเป้าหมายการ Commit รายสัปดาห์พร้อมแถบแสดงความคืบหน้า      |
+|  🔔 **Commit Reminder**  | ระบบแจ้งเตือนผ่านเบราว์เซอร์ตามเวลาที่กำหนด                   |
+| 🌙 **Dark / Light Mode** | สลับธีมมืด/สว่าง และจดจำค่าไว้ในเครื่อง                       |
+|    🔗 **Quick Links**    | เข้าถึงโปรเจกต์ทั้งหมดได้จากที่เดียว                          |
+|     💡 **Daily Tip**     | คำแนะนำสำหรับนักพัฒนาที่เปลี่ยนไปในทุกๆ วัน                   |
 
 ---
 
@@ -44,6 +45,7 @@
 เปิดไฟล์ `index.html` ในเบราว์เซอร์ของคุณ
 
 **วิธีที่ 2 — รันผ่าน Local Server (แนะนำสำหรับการใช้ API)**
+
 ```bash
 python -m http.server 8080
 # จากนั้นเปิด: http://localhost:8080
