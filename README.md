@@ -101,7 +101,6 @@ const PLAY_LINKS = {
 
 |     | Game                                        |                            Play                             |
 | :-: | ------------------------------------------- | :---------------------------------------------------------: |
-| 🎮  | **Rialo Network Tycoon** — Idle Web3 game   | [▶ Play](https://romeototo.github.io/ai-tycoon-rialo-game/) |
 | 👾  | **Monster Tapper** — Clicker + Boss Battles |    [▶ Play](https://romeototo.github.io/monster-tapper/)    |
 
 ---
